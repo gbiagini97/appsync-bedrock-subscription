@@ -1,0 +1,21 @@
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Query {
+    ping: Boolean
+}
+
+type Mutation {
+    invoke(prompt: String!): String!
+}
+
+
+# subscription arguments are matched against the mutation response fields, not the mutation arguments
+type Subscription {
+    invoked(id: String): String
+    @aws_subscribe(mutations: ["invoke"])
+}
+
